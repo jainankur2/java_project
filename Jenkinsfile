@@ -27,6 +27,15 @@ pipeline {
             }
         }
 
+        stage('Copy files on Ansible server'){
+            steps{
+               sshagent(credentials : ['ansible-pem']) {
+                     sh 'scp ansible/deploy.yml ubuntu@172.20.11.52:/home/ubuntu/'
+                     sh 'scp ansible/inventory ubuntu@172.20.11.52:/home/ubuntu/'
+               }
+            }
+        }
+
         stage('Deploy Image with Ansible'){
             steps{
                sshagent(credentials : ['ansible-pem']) {

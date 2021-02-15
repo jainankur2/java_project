@@ -1,0 +1,21 @@
+---
+ - hosts: dev
+   become: true
+   tasks:
+     - name: remove previous version
+       shell: "docker stop loylogic"
+       ignore_errors: yes
+
+     - name: remove container
+       shell: "docker rm $(docker ps -a)"
+       ignore_errors: yes
+
+     - name: remove unused images
+       shell: "docker rmi $(docker images -a -q)"
+       ignore_errors: yes
+
+     - name: Pull docker image
+       shell: "docker pull jainankur2/loylogic:{{build_number}}"
+
+     - name: Deploy docker image
+       shell: "docker run -p 80:8080 -d --name loylogic jainankur2/loylogic:{{build_number}}"
