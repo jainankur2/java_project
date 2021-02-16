@@ -39,7 +39,7 @@ pipeline {
         stage('Deploy Image with Ansible'){
             steps{
                sshagent(credentials : ['ansible-pem']) {
-                  sh 'ssh -t -t ubuntu@172.20.11.52 -o StrictHostKeyChecking=no "ansible-playbook /home/ubuntu/deploy.yml -i /home/ubuntu/inventory -u ec2-user --private-key=/home/ubuntu/keys.pem --extra-var build_number=${BUILD_NUMBER}"'
+                  sh 'ssh -t -t ubuntu@172.20.11.52 -o StrictHostKeyChecking=no "ansible-playbook /home/ubuntu/deploy.yml -i /home/ubuntu/inventory -u ubuntu --private-key=/home/ubuntu/keys.pem --extra-var build_number=${BUILD_NUMBER}"'
                }
             }
         }
