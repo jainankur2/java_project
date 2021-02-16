@@ -30,8 +30,8 @@ pipeline {
         stage('Copy files on Ansible server'){
             steps{
                sshagent(credentials : ['ansible-pem']) {
-                  sh 'scp ansible/deploy.yml ubuntu@172.20.11.89:/home/ubuntu/'
-                  sh 'scp ansible/inventory ubuntu@172.20.11.89:/home/ubuntu/'
+                  sh 'scp ansible/deploy.yml ubuntu@172.20.11.224:/home/ubuntu/'
+                  sh 'scp ansible/inventory ubuntu@172.20.11.224:/home/ubuntu/'
                }
             }
         }
@@ -39,7 +39,7 @@ pipeline {
         stage('Deploy Image with Ansible'){
             steps{
                sshagent(credentials : ['ansible-pem']) {
-                  sh 'ssh -t -t ubuntu@172.20.11.89 -o StrictHostKeyChecking=no "ansible-playbook /home/ubuntu/deploy.yml -i /home/ubuntu/inventory -u ubuntu --private-key=/home/ubuntu/keys.pem --extra-var build_number=${BUILD_NUMBER}"'
+                  sh 'ssh -t -t ubuntu@172.20.11.224 -o StrictHostKeyChecking=no "ansible-playbook /home/ubuntu/deploy.yml -i /home/ubuntu/inventory -u ubuntu --private-key=/home/ubuntu/keys.pem --extra-var build_number=${BUILD_NUMBER}"'
                }
             }
         }
