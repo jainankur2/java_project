@@ -1,0 +1,22 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      docker: 18
+  pre_build:
+    commands:
+       - $(aws ecr get-login --no-include-email --region us-east-2)
+       - REPOSITORY_URI=651827679494.dkr.ecr.us-east-2.amazonaws.com/indigo-dev-int-service-1-ecr
+       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7 )
+       - IMAGE_TAG=${COMMIT_HASH:=latest}
+  build:
+    commands:
+       - mvn clean install
+       - docker build -t $REPOSITORY_URI:latest .
+       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+  post_build:
+    commands:
+       - docker push $REPOSITORY_URI:$IMAGE_TAG
+       - printf '[{"name":"port80-service","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+  artifacts:
+    files: imagedefinitions.json
