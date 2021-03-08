@@ -18,5 +18,5 @@ phases:
     commands:
        - docker push $REPOSITORY_URI:$IMAGE_TAG
        - printf '[{"name":"port80-service","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-  artifacts:
+artifacts:
     files: imagedefinitions.json
