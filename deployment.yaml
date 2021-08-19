@@ -16,5 +16,6 @@ spec:
       containers: # List
         - name: myapp-container
           image: jainankur2/loylogic:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
