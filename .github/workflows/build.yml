@@ -24,13 +24,13 @@ jobs:
     - name: Build and tag the image
       run: |
         # Build and tag the image
-        docker build -t ${{ secrets.DOCKER_REPO }}:latest .
+        docker build -t ${{ secrets.DOCKER_REPO }}:28 .
         
     - name: Login to Docker Hub
       run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p "${{ secrets.DOCKER_PASSWORD }}"
         
     - name: Publish Docker image
-      run: docker push ${{ secrets.DOCKER_REPO }}
+      run: docker push ${{ secrets.DOCKER_REPO }}:28
      
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -53,6 +53,6 @@ jobs:
 #        aws_secret_access_key: ${{ secrets.AWS_PRIMARY_SECRET_ACCESS_KEY }}
 #        aws_region: ${{ secrets.AWS_PRIMARY_REGION }}
 #        cluster_name: ${{ secrets.cluster_name }}
-#        args: set image --namespace default --record deployment/myapp myapp=${{ secrets.DOCKER_REPO }}:latest
+#        args: set image --namespace default --record deployment/myapp myapp=${{ secrets.DOCKER_REPO }}:28
 
    
