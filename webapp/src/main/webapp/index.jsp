@@ -7,6 +7,6 @@ html>
         <p>Ankur Jain</p>
     </body>
 
-    <img src="GH.jpg" width=500/>
+    <img src="download.png" width=500/>
 </html>
 
