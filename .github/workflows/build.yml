@@ -24,13 +24,13 @@ jobs:
     - name: Build and tag the image
       run: |
         # Build and tag the image
-        docker build -t ${{ secrets.DOCKER_REPO }}:28 .
+        docker build -t ${{ secrets.DOCKER_REPO }}:latest .
         
     - name: Login to Docker Hub
       run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p "${{ secrets.DOCKER_PASSWORD }}"
         
     - name: Publish Docker image
-      run: docker push ${{ secrets.DOCKER_REPO }}:28
+      run: docker push ${{ secrets.DOCKER_REPO }}:latest
      
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
