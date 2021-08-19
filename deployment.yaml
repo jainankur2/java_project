@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata: # Dictionary
+      name: myapp-pod
+      labels: # Dictionary
+        app: myapp
+    spec:
+      containers: # List
+        - name: myapp-container
+          image: jainankur2/loylogic:latest
+          ports:
+            - containerPort: 8080
