@@ -43,9 +43,10 @@ jobs:
       uses: Consensys/kubernetes-action@master
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        IMAGE: ${{ secrets.DOCKER_REPO }}:$GITHUB_RUN_NUMBER
       with:
 #        args: apply -f deployment.yaml
-        args: set image deployment/myapp-deployment myapp-container=${{ secrets.DOCKER_REPO }}:${{ GITHUB_RUN_NUMBER }} --record=true
+        args: set image deployment/myapp-deployment myapp-container=$IMAGE --record=true
       
 #    - name: Update deployment
 #      uses: ianbelcher/eks-kubectl-action@master
