@@ -24,13 +24,13 @@ jobs:
     - name: Build and tag the image
       run: |
         # Build and tag the image
-        docker build -t ${{ secrets.DOCKER_REPO }}:$GITHUB_RUN_NUMBER .
+        docker build -t ${{ secrets.DOCKER_REPO }}:${{ github.run_number }} .
         
     - name: Login to Docker Hub
       run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p "${{ secrets.DOCKER_PASSWORD }}"
         
     - name: Publish Docker image
-      run: docker push ${{ secrets.DOCKER_REPO }}:$GITHUB_RUN_NUMBER
+      run: docker push ${{ secrets.DOCKER_REPO }}:${{ github.run_number }}
      
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -43,10 +43,10 @@ jobs:
       uses: Consensys/kubernetes-action@master
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-        IMAGE: ${{ secrets.DOCKER_REPO }}:$GITHUB_RUN_NUMBER
+        IMAGE: ${{ secrets.DOCKER_REPO }}:${{ github.run_number }}
       with:
 #        args: apply -f deployment.yaml
-        args: set image deployment/myapp-deployment myapp-container=${{ secrets.DOCKER_REPO }}:latest --record=true
+        args: set image deployment/myapp-deployment myapp-container=${{ secrets.DOCKER_REPO }}:${{ github.run_number }} --record=true
       
 #    - name: Update deployment
 #      uses: ianbelcher/eks-kubectl-action@master
