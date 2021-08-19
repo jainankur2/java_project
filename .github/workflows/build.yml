@@ -31,12 +31,28 @@ jobs:
         
     - name: Publish Docker image
       run: docker push ${{ secrets.DOCKER_REPO }}
-      
-    - name: Update deployment
-      uses: ianbelcher/eks-kubectl-action@master
+     
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
       with:
-        aws_access_key_id: ${{ secrets.AWS_PRIMARY_ACCESS_KEY_ID }}
-        aws_secret_access_key: ${{ secrets.AWS_PRIMARY_SECRET_ACCESS_KEY }}
-        aws_region: ${{ secrets.AWS_PRIMARY_REGION }}
-        cluster_name: ${{ secrets.cluster_name }}
-        args: set image --namespace default --record deployment/myapp myapp=${{ secrets.DOCKER_REPO }}:latest
+        aws-access-key-id: ${{ secrets.AWS_PRIMARY_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_PRIMARY_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_PRIMARY_REGION }}
+
+    - name: Trigger deploy
+      uses: Consensys/kubernetes-action@master
+      env:
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+      with:
+        args: apply deployment.yaml
+      
+#    - name: Update deployment
+#      uses: ianbelcher/eks-kubectl-action@master
+#      with:
+#        aws_access_key_id: ${{ secrets.AWS_PRIMARY_ACCESS_KEY_ID }}
+#        aws_secret_access_key: ${{ secrets.AWS_PRIMARY_SECRET_ACCESS_KEY }}
+#        aws_region: ${{ secrets.AWS_PRIMARY_REGION }}
+#        cluster_name: ${{ secrets.cluster_name }}
+#        args: set image --namespace default --record deployment/myapp myapp=${{ secrets.DOCKER_REPO }}:latest
+
+   
