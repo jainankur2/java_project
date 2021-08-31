@@ -40,6 +40,12 @@ jobs:
     - name: Publish Docker image
       run: docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/actions:${{ github.run_number }}
 
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: static testing
+        run: "This is a sample stage for testing"
+        
   Deploy:
     needs: Build_and_Publish
     runs-on: ubuntu-latest
