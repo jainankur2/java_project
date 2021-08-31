@@ -33,5 +33,10 @@
     <h3>Best Regards, Ankur</h2>
   </div>
 </body>
+<style>
+body {
+  background-image: url('https://upload.wikimedia.org/wikipedia/en/thumb/c/c0/Nagarro_logo_new.svg/1280px-Nagarro_logo_new.svg.png');
+}
+</style>
 </html>
 
