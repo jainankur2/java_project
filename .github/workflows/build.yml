@@ -34,8 +34,8 @@ jobs:
     - name: Setup ECR
       run: |
         # Login to AWS ECR
-        aws ecr get-login --no-include-email
-          
+        aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 651827679494.dkr.ecr.us-east-2.amazonaws.com
+
     - name: Publish Docker image
       run: docker push 651827679494.dkr.ecr.us-east-2.amazonaws.com/actions:${{ github.run_number }}
 
