@@ -48,9 +48,18 @@ jobs:
       uses: Consensys/kubernetes-action@master
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-        IMAGE: ${{ secrets.DOCKER_REPO }}:${{ github.run_number }}
       with:
         args: set image deployment/myapp-deployment myapp-container=${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_DEFAULT_REGION }}.amazonaws.com/actions:${{ github.run_number }} --record=true
-      
+    
+  Verify:
+    needs: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Trigger deploy
+      uses: Consensys/kubernetes-action@master
+      env:
+        KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+      with:
+        args: get pods
 
    
