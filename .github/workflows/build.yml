@@ -1,4 +1,4 @@
-name: Maven CI/CD for Github Actions
+name: CI/CD using Github Actions
 on:
  pull_request:
     branches:
@@ -13,7 +13,7 @@ env:
   AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
 
 jobs:
-  Build:
+  Build and Publish:
 
     runs-on: ubuntu-latest
 
@@ -32,10 +32,6 @@ jobs:
         # Build and tag the image
         docker build -t "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/actions:${{ github.run_number }}" .
 
-  Publish:
-    needs: Build
-    runs-on: ubuntu-latest
-    steps:
     - name: Setup ECR
       run: |
         # Login to AWS ECR
@@ -45,7 +41,7 @@ jobs:
       run: docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/actions:${{ github.run_number }}
 
   Deploy:
-    needs: Publish
+    needs: Build and Publish
     runs-on: ubuntu-latest
     steps:
     - name: Trigger deploy
