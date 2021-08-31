@@ -13,10 +13,8 @@
     <h3>Best Regards, Ankur</h2>
   </div>
 </body>
-<style>
-body {
-  background-image: url('https://www.nagarro.com/hubfs/Nagarro%20logo_new%20brand%20identity.jpg');
-}
-</style>
+<div class="background">
+  <div class="blur"></div>
+</div>
 </html>
 
