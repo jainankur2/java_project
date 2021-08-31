@@ -3,26 +3,6 @@
 <head>
   <meta charset="utf-8">
   <title>Sample Deployment</title>
-  <style>
-    body {
-      color: #ffffff;
-      background-color: #0188cc;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-    }
-    
-    h1 {
-      font-size: 500%;
-      font-weight: normal;
-      margin-bottom: 0;
-    }
-    
-    h2 {
-      font-size: 200%;
-      font-weight: normal;
-      margin-bottom: 0;
-    }
-  </style>
 </head>
 <body>
   <div align="center">
@@ -35,7 +15,7 @@
 </body>
 <style>
 body {
-  background-image: url('https://upload.wikimedia.org/wikipedia/en/thumb/c/c0/Nagarro_logo_new.svg/1280px-Nagarro_logo_new.svg.png');
+  background-image: url('https://www.nagarro.com/hubfs/Nagarro%20logo_new%20brand%20identity.jpg');
 }
 </style>
 </html>
