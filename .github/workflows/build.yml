@@ -10,6 +10,7 @@ env:
   AWS_DEFAULT_OUTPUT: json
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PRIMARY_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PRIMARY_SECRET_ACCESS_KEY }}
+  AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
 
 jobs:
   build_and_test:
@@ -29,15 +30,15 @@ jobs:
     - name: Build and tag the image
       run: |
         # Build and tag the image
-        docker build -t "651827679494.dkr.ecr.us-east-2.amazonaws.com/actions:${{ github.run_number }}" .
+        docker build -t "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/actions:${{ github.run_number }}" .
         
     - name: Setup ECR
       run: |
         # Login to AWS ECR
-        aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 651827679494.dkr.ecr.us-east-2.amazonaws.com
+        aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
 
     - name: Publish Docker image
-      run: docker push 651827679494.dkr.ecr.us-east-2.amazonaws.com/actions:${{ github.run_number }}
+      run: docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/actions:${{ github.run_number }}
 
     - name: Trigger deploy
       uses: Consensys/kubernetes-action@master
@@ -45,7 +46,7 @@ jobs:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         IMAGE: ${{ secrets.DOCKER_REPO }}:${{ github.run_number }}
       with:
-        args: set image deployment/myapp-deployment myapp-container=651827679494.dkr.ecr.us-east-2.amazonaws.com/actions:${{ github.run_number }} --record=true
+        args: set image deployment/myapp-deployment myapp-container=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/actions:${{ github.run_number }} --record=true
       
 
    
