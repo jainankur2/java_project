@@ -55,7 +55,7 @@ jobs:
     needs: Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: Trigger deploy
+    - name: Verify Deployment
       uses: Consensys/kubernetes-action@master
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
