@@ -29,6 +29,7 @@
     <h1>Congratulations</h1>
     <h2>This application was deployed using Github Actions for nagarro POC!!! :)</h2>
     <p>For next steps, read the <a href="https://github.com/features/actions">Github Actions Documentation</a>.</p>
+    <img src="download.png" width=500/>
     <h3>Best Regards, Ankur</h2>
   </div>
 </body>
