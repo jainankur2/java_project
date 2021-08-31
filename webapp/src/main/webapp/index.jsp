@@ -13,8 +13,10 @@
     <h3>Best Regards, Ankur</h2>
   </div>
 </body>
-<div class="background">
-  <div class="blur"></div>
-</div>
+<style>
+body {
+  background-image: url('https://i.ytimg.com/vi/z6cBtguFSTk/maxresdefault.jpg');
+}
+</style>
 </html>
 
