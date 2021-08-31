@@ -13,7 +13,7 @@ env:
   AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
 
 jobs:
-  build:
+  Build:
 
     runs-on: ubuntu-latest
 
@@ -33,6 +33,7 @@ jobs:
         docker build -t "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/actions:${{ github.run_number }}" .
 
   Publish:
+    needs: Build
     runs-on: ubuntu-latest
     steps:
     - name: Setup ECR
@@ -44,6 +45,7 @@ jobs:
       run: docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/actions:${{ github.run_number }}
 
   Deploy:
+    needs: Publish
     runs-on: ubuntu-latest
     steps:
     - name: Trigger deploy
