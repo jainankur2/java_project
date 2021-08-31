@@ -46,7 +46,7 @@ jobs:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         IMAGE: ${{ secrets.DOCKER_REPO }}:${{ github.run_number }}
       with:
-        args: set image deployment/myapp-deployment myapp-container=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/actions:${{ github.run_number }} --record=true
+        args: set image deployment/myapp-deployment myapp-container=${{ env.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.AWS_DEFAULT_REGION }}.amazonaws.com/actions:${{ github.run_number }} --record=true
       
 
    
