@@ -44,7 +44,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: static testing
-        run: "This is a sample stage for testing"
+        run: echo "This is a sample stage for testing"
         
   Deploy:
     needs: Build_and_Publish
