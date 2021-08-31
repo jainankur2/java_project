@@ -1,9 +1,9 @@
 name: Maven CI/CD for Github Actions
 on:
- push:
-    branches: [ master ]
  pull_request:
-    branches: [ master ]
+    branches:
+    - master
+    types: [closed]
     
 env:
   AWS_DEFAULT_REGION: us-east-2
