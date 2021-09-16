@@ -1,4 +1,8 @@
-From tomcat:8.0.51-jre8-alpine
-RUN rm -rf /usr/local/tomcat/webapps/*
-COPY webapp/target/webapp.war /usr/local/tomcat/webapps/ROOT.war
-CMD ["catalina.sh","run"]
+FROM ubuntu
+MAINTAINER Ankur Jain
+RUN apt-get update
+RUN apt-get install -y python
+ADD hello.py /home/hello.py
+ADD a.py /home/a.py
+CMD ["/home/hello.py"]
+ENTRYPOINT ["python"]
