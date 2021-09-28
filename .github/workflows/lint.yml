@@ -1,6 +1,6 @@
 name: flake8 Lint
 on:
- push:
+ pull_request:
     branches: [ backup2 ]
 jobs:
   flake8-lint:
@@ -17,4 +17,5 @@ jobs:
         uses: py-actions/flake8@v1
         with:
           max-line-length: "99"
+          indent-size: "4"
           args: "--show-source"
