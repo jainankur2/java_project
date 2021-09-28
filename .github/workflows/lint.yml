@@ -17,4 +17,5 @@ jobs:
         uses: py-actions/flake8@v1
         with:
           max-line-length: "99"
+          indent-size: "4"
           args: "--show-source"
