@@ -1,1 +1,1 @@
-print ("next message")
+print("next message")
