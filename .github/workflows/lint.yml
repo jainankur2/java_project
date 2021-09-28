@@ -1,7 +1,9 @@
 name: flake8 Lint
-
-on: [push, pull_request]
-
+on:
+ push:
+    branches: [ backup2 ]
+ pull_request:
+    branches: [ backup2 ]
 jobs:
   flake8-lint:
     runs-on: ubuntu-latest
