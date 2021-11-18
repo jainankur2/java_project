@@ -1,6 +1,6 @@
 
 # part-1
-### Run following command to run the container from the image
+### Run following command to run the container from the image.
 1.  docker run infracloudio/csvserver:latest
 
 ### Following are the logs generated from command from step 1, which clearly shows it is failed because inputdata directory does not exist inside the container
