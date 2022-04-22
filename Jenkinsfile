@@ -6,6 +6,8 @@ pipeline {
                sh 'wget https://downloads.apache.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip'
                sh 'mv apache-maven-3.6.3-bin.zip my_zip_folder/'
                withCredentials([usernamePassword(credentialsId: 'git-password', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                        sh('git add .')
+                        sh('git commit')
                         sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/jainankur2/java_project.git HEAD:master')
                     }
             }
