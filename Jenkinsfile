@@ -9,7 +9,7 @@ pipeline {
                         sh ('git config --global user.email "jain.ankur0592@gmail.com"')
                         sh ('git config --global user.name "Ankur Jain"')
                         sh('git add .')
-                        sh('git commit')
+                        sh('git commit -m "updating zip"')
                         sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/jainankur2/java_project.git HEAD:master')
                     }
             }
