@@ -1,6 +1,13 @@
 pipeline {
       agent any
     stages{
+        stage('download file'){
+            steps{
+               sh 'wget https://downloads.apache.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip'
+               sh 'mv apache-maven-3.6.3-bin.zip my_zip_folder/'
+            }
+        }
+          
         stage('Build artifact'){
             steps{
                sh label: 'compile-hello-world', script: 'mvn -B -f pom.xml clean install'
